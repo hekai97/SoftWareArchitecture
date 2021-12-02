@@ -1,7 +1,5 @@
 package design.util;
 
-import design.dao.DBCon;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

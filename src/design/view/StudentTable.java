@@ -1,16 +1,14 @@
 package design.view;
 
 import design.controller.StudentList;
-import design.dao.DBCon;
 import design.entity.Student;
+import design.util.RemoteFunction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
@@ -62,7 +60,7 @@ public class StudentTable extends JPanel {
         AddToSouth(res,item);
     }
     private void AddToSouth(Object[][] res,JMenuItem item){
-        Connection con= DBCon.getInstance().getConnection();
+        RemoteFunction remoteFunction=new RemoteFunction();
         deletebutton.addActionListener(e -> {
             int[] selectedRows = jTable.getSelectedRows();
             //Connection con= AdminDBCon.getConnection();
@@ -70,9 +68,8 @@ public class StudentTable extends JPanel {
                 if (selectedRows.length > 0) {
                     for (int i = selectedRows.length - 1; i >= 0; i--) {
                         try {
-                            String s = "delete from student where Sno=" + defaultTableModel.getValueAt(selectedRows[i], 0);
-                            PreparedStatement statement = con.prepareStatement(s);
-                            statement.execute();
+                            String sql = "delete from student where Sno=" + defaultTableModel.getValueAt(selectedRows[i], 0);
+                            remoteFunction.execute(sql);
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                         }
@@ -96,15 +93,14 @@ public class StudentTable extends JPanel {
             @Override
             public void keyReleased(KeyEvent e) {
                 if(e.isAltDown()&&e.getKeyCode()==KeyEvent.VK_ENTER){
-                    String s="insert into Student values(?,?,?,?,?)";
+                    String sql="insert into Student values("
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),0)+","
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),1)+","
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),2)+","
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),3)+","
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),4)+")";
                     try {
-                        PreparedStatement statement=con.prepareStatement(s);
-                        statement.setString(1,(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),0));
-                        statement.setString(2,(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),1));
-                        statement.setString(3,(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),2));
-                        statement.setString(4,(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),3));
-                        statement.setString(5,(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),4));
-                        statement.execute();
+                        remoteFunction.execute(sql);
                         item.doClick();
                         JOptionPane.showMessageDialog(null,"插入成功");
                     } catch (SQLIntegrityConstraintViolationException ex) {
@@ -123,7 +119,6 @@ public class StudentTable extends JPanel {
             }
         });*/
         updatebutton.addActionListener(e -> {
-            try {
             String sql="update student set "
                     +"Sno='" +defaultTableModel.getValueAt(jTable.getSelectedRow(),0)+"',"
                     +"Sname='"+defaultTableModel.getValueAt(jTable.getSelectedRow(),1)+"',"
@@ -131,8 +126,8 @@ public class StudentTable extends JPanel {
                     +"Sclassname='"+defaultTableModel.getValueAt(jTable.getSelectedRow(),3)+"',"
                     +"Sfaculty='"+defaultTableModel.getValueAt(jTable.getSelectedRow(),4)+"' "
                     +"where Sno="+/*defaultTableModel.getValueAt(jTable.getSelectedRow(),0)*/res[jTable.getSelectedRow()][0];
-                PreparedStatement statement=con.prepareStatement(sql);
-                statement.execute();
+            try {
+                remoteFunction.execute(sql);
                 JOptionPane.showMessageDialog(null,"修改成功");
 
             }/*/catch (ArrayIndexOutOfBoundsException ex){

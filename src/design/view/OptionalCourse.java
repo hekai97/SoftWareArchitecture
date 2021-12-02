@@ -1,8 +1,7 @@
 package design.view;
 
 import design.controller.CourseList;
-import design.dao.DBCon;
-import design.entity.Course;
+import design.util.DBCon;
 import design.entity.CourseWithTeacher;
 
 import javax.swing.*;

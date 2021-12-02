@@ -4,14 +4,8 @@ import design.entity.Course;
 import design.entity.CourseWithTeacher;
 import design.factory.CourseFactory;
 import design.factory.CourseWithTeacherFactory;
-import design.model.CourseWithTeacherModel;
 import design.serverImp.RepositoryImp;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /***********************************************************
@@ -37,14 +31,14 @@ public class CourseList {
     public List<CourseWithTeacher> CourseRes(boolean res, String id){
         String s;
         if(res) {
-             s= "select Cno,Cname,Tname,Ccredit,Ctime from Course,teacher"
-                     + " where Cno not in (select grade.Cno from grade where Sno="+id
-                     + ") AND course.Ctno =teacher.Tno" ;
+            s= "select Cno,Cname,Tname,Ccredit,Ctime from Course,teacher"
+                 + " where Cno not in (select grade.Cno from grade where Sno="+id
+                 + ") AND course.Ctno =teacher.Tno" ;
         }
         else{
             s="select Cno,Cname,Tname,Ccredit,Ctime from Course,teacher"
-                    + " where Cno in (select grade.Cno from grade where Sno="+id
-                    + ") AND course.Ctno =teacher.Tno" ;
+                + " where Cno in (select grade.Cno from grade where Sno="+id
+                + ") AND course.Ctno =teacher.Tno" ;
         }
         return getCourses(s);
     }

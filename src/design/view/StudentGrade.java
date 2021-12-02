@@ -1,8 +1,7 @@
 package design.view;
 
 import design.controller.GradeList;
-import design.dao.DBCon;
-import design.entity.Grade;
+import design.util.DBCon;
 import design.entity.StudentGradeForStudent;
 import design.entity.StudentGradeForTeacher;
 

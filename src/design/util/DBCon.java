@@ -1,6 +1,4 @@
-package design.dao;
-
-import design.util.ConfigReader;
+package design.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,6 +31,8 @@ public class DBCon {
         user= configReader.getKey("database_user");
         password= configReader.getKey("database_password");
         try {
+            System.out.println(url);
+            System.out.println(configReader.getKey("test"));
             Class.forName(driver);
             connection= DriverManager.getConnection(url,user,password);
         }catch (ClassNotFoundException | SQLException e)

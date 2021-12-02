@@ -1,6 +1,6 @@
 package design.view;
 
-import design.dao.DBCon;
+import design.util.DBCon;
 
 import javax.swing.*;
 import java.awt.*;

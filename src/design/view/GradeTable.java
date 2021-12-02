@@ -1,16 +1,14 @@
 package design.view;
 
 import design.controller.GradeList;
-import design.dao.DBCon;
 import design.entity.Grade;
+import design.util.RemoteFunction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
@@ -58,7 +56,7 @@ public class GradeTable extends JPanel {
         AddToSouth(res,item);
     }
     private void AddToSouth(Object[][] res,JMenuItem item){
-        Connection con= DBCon.getInstance().getConnection();
+        RemoteFunction remoteFunction=new RemoteFunction();
         deletebutton.addActionListener(e -> {
             int[] selectedRows = jTable.getSelectedRows();
             if(JOptionPane.showConfirmDialog(null,"确认删除？")==0) {
@@ -66,8 +64,7 @@ public class GradeTable extends JPanel {
                     for (int i = selectedRows.length - 1; i >= 0; i--) {
                         try {
                             String s = "delete from grade where Sno=" + defaultTableModel.getValueAt(selectedRows[i], 0);
-                            PreparedStatement statement = con.prepareStatement(s);
-                            statement.execute();
+                            remoteFunction.execute(s);
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                         }
@@ -85,13 +82,12 @@ public class GradeTable extends JPanel {
             @Override
             public void keyReleased(KeyEvent e) {
                 if(e.isAltDown()&&e.getKeyCode()==KeyEvent.VK_ENTER){
-                    String s="insert into grade values(?,?,?)";
+                    String sql="insert into grade values("
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),0)+","
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),1)+","
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),2)+")";
                     try {
-                        PreparedStatement statement=con.prepareStatement(s);
-                        statement.setString(1,(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),0));
-                        statement.setString(2,(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),1));
-                        statement.setString(3,(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),2));
-                        statement.execute();
+                        remoteFunction.execute(sql);
                         item.doClick();
                         JOptionPane.showMessageDialog(null,"插入成功");
                     } catch (SQLIntegrityConstraintViolationException ex) {
@@ -109,8 +105,7 @@ public class GradeTable extends JPanel {
                     +"grade='"+defaultTableModel.getValueAt(jTable.getSelectedRow(),2)+"' "
                     +"where Sno="+res[jTable.getSelectedRow()][0];
             try {
-                PreparedStatement statement=con.prepareStatement(sql);
-                statement.execute();
+                remoteFunction.execute(sql);
                 JOptionPane.showMessageDialog(null,"修改成功");
             } catch (SQLException throwables) {
                 throwables.printStackTrace();

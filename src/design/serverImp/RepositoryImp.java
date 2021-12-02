@@ -1,6 +1,6 @@
 package design.serverImp;
 
-import design.dao.DBCon;
+import design.util.DBCon;
 import design.entity.Teacher;
 import design.factory.ModelFactory;
 import design.factory.TeacherFactory;

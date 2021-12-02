@@ -1,7 +1,6 @@
 package design.view;
 
 import design.controller.CourseList;
-import design.dao.DBCon;
 import design.entity.Course;
 import design.util.RemoteFunction;
 
@@ -10,8 +9,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
@@ -61,15 +58,14 @@ public class CourseTable extends JPanel {
     }
     private void AddToSouth(Object[][] res,JMenuItem item){
         RemoteFunction remoteFunction=new RemoteFunction();
-        Connection con= DBCon.getInstance().getConnection();
         deletebutton.addActionListener(e -> {
             int[] selectedRows = jTable.getSelectedRows();
             if(JOptionPane.showConfirmDialog(null,"确认删除？")==0) {
                 if (selectedRows.length > 0) {
                     for (int i = selectedRows.length - 1; i >= 0; i--) {
                         try {
-                            String s = "delete from course where Cno=" + defaultTableModel.getValueAt(selectedRows[i], 0);
-                            remoteFunction.execute(s);
+                            String sql = "delete from course where Cno=" + defaultTableModel.getValueAt(selectedRows[i], 0);
+                            remoteFunction.execute(sql);
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                         }
@@ -88,7 +84,6 @@ public class CourseTable extends JPanel {
             @Override
             public void keyReleased(KeyEvent e) {
                 if(e.isAltDown()&&e.getKeyCode()==KeyEvent.VK_ENTER){
-                    String s="insert into course values(?,?,?,?,?)";
                     String sql="insert into course values("
                             +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),0)+","
                             +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),1)+","
@@ -96,13 +91,7 @@ public class CourseTable extends JPanel {
                             +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),3)+","
                             +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),4)+")";
                     try {
-                        PreparedStatement statement=con.prepareStatement(s);
-                        statement.setString(1,(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),0));
-                        statement.setString(2,(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),1));
-                        statement.setString(3,(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),2));
-                        statement.setString(4,(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),3));
-                        statement.setString(5,(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),4));
-                        statement.execute();
+                        remoteFunction.execute(sql);
                         item.doClick();
                         JOptionPane.showMessageDialog(null,"插入成功");
                     } catch (SQLIntegrityConstraintViolationException ex) {
@@ -122,8 +111,7 @@ public class CourseTable extends JPanel {
                     +"Ctime='"+defaultTableModel.getValueAt(jTable.getSelectedRow(),4)+"' "
                     +"where Cno="+res[jTable.getSelectedRow()][0];
             try {
-                PreparedStatement statement=con.prepareStatement(sql);
-                statement.execute();
+                remoteFunction.execute(sql);
                 JOptionPane.showMessageDialog(null,"修改成功");
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
