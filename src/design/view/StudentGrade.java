@@ -1,15 +1,13 @@
 package design.view;
 
 import design.controller.GradeList;
-import design.util.DBCon;
 import design.entity.StudentGradeForStudent;
 import design.entity.StudentGradeForTeacher;
+import design.util.RemoteFunction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -72,15 +70,17 @@ public class StudentGrade extends JPanel {
         AddToSouth(res,item,id);
     }
     private void AddToSouth(Object[][] res,JMenuItem item,String id){
-        Connection con= DBCon.getInstance().getConnection();
+//        Connection con= DBCon.getInstance().getConnection();
+        RemoteFunction remoteFunction=new RemoteFunction();
         updatebutton.addActionListener(e -> {
             String sql="update grade set "
                     +"grade='"+dtm.getValueAt(table.getSelectedRow(),1)+"' "
                     +"where Sno=(select Sno from student where Sname='"+res[table.getSelectedRow()][0]+"')"
                     +"AND Cno=(select Cno from course where Ctno="+id+")";
             try {
-                PreparedStatement statement=con.prepareStatement(sql);
-                statement.execute();
+//                PreparedStatement statement=con.prepareStatement(sql);
+//                statement.execute();
+                remoteFunction.execute(sql);
                 item.doClick();
                 JOptionPane.showMessageDialog(null,"修改成功");
             } catch (SQLException throwables) {

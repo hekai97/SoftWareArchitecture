@@ -1,10 +1,10 @@
 package design.serverImp;
 
-import design.util.DBCon;
 import design.entity.Teacher;
 import design.factory.ModelFactory;
 import design.factory.TeacherFactory;
 import design.server.Repository;
+import design.util.DBCon;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -25,11 +25,13 @@ public class RepositoryImp<E> implements Repository<E> {
     @Override
     public List<E> getResult(ModelFactory factory,String sql) {
         Connection connection= DBCon.getInstance().getConnection();
+//        RemoteFunction remoteFunction=new RemoteFunction();
         List<E> list=new ArrayList<>();
         try {
             PreparedStatement preparedStatement=connection.prepareStatement(sql);
             preparedStatement.execute();
             ResultSet resultSet= preparedStatement.executeQuery();
+//            ResultSet resultSet= remoteFunction.getResult(sql);
             ResultSetMetaData resultSetMetaData=resultSet.getMetaData();
             String[] ColumnName=getTableColumnName(resultSetMetaData);
             /**首先获取数据库列名，然后通过传进来的工厂类获取实例对应的类，通过反射
@@ -40,6 +42,12 @@ public class RepositoryImp<E> implements Repository<E> {
              * 拆分开，functions[0][]中放的是对应列名顺序的set方法，functions[1][]中
              * 存放的是对应列名顺序的getter方法*/
             Method[][] functions=Splitting(factory.getInstance().getClass().getDeclaredMethods(), ColumnName);
+//            for(int i=0;i< functions.length;++i){
+//                for(int j=0;j<functions[i].length;++j){
+//                    System.out.println(functions[i][j]);
+//                }
+//            }
+
             while(resultSet.next()){
                 E object= (E) factory.getInstance();
                 for(int i=0;i< ColumnName.length;++i){

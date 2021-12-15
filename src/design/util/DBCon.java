@@ -9,13 +9,6 @@ import java.sql.SQLException;
  * @Date: 2021/11/27
  */
 public class DBCon {
-    //定义常量数据库的驱动
-//    private static final String driver="com.mysql.cj.jdbc.Driver";
-//    //定义常量数据库的url
-//    private static final String url="jdbc:mysql://localhost:3306/courseselection?serverTimezone=UTC";
-//    //定义数据库的用户名和密码
-//    private static final String user="root";
-//    private static final String password="hk19990707";
     private static final String driver;
     private static final String url;
     private static final String user;
@@ -31,8 +24,6 @@ public class DBCon {
         user= configReader.getKey("database_user");
         password= configReader.getKey("database_password");
         try {
-            System.out.println(url);
-            System.out.println(configReader.getKey("test"));
             Class.forName(driver);
             connection= DriverManager.getConnection(url,user,password);
         }catch (ClassNotFoundException | SQLException e)

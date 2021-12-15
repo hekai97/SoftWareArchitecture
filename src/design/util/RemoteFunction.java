@@ -18,7 +18,7 @@ public class RemoteFunction {
     private final String host;
     private final int port;
     private Registry registry;
-    RemoteInterface RemoteFunctions = null;
+    private RemoteInterface RemoteFunctions = null;
     public RemoteFunction(){
         host=configReader.getKey("server_ip");
         port=Integer.parseInt(configReader.getKey("server_port"));
@@ -39,10 +39,13 @@ public class RemoteFunction {
     public ResultSet getResult(String sql) throws SQLException{
         ResultSet resultSet=null;
         try {
-            resultSet= RemoteFunctions.getResultSet(sql);
+            resultSet = RemoteFunctions.getResultSet(sql);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("远程调用失败");
         }
         return resultSet;
+    }
+    public int verify(int id,String user,String password) throws RemoteException{
+        return RemoteFunctions.verifyUserPassword(id,user,password);
     }
 }

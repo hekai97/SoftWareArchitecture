@@ -1,14 +1,12 @@
 package design.view;
 
 import design.controller.CourseList;
-import design.util.DBCon;
 import design.entity.CourseWithTeacher;
+import design.util.RemoteFunction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -55,16 +53,18 @@ public class OptionalCourse extends JPanel {
         AddToSouth(res,item,id);
     }
     private void AddToSouth(Object[][] res,JMenuItem item,String id){
-        Connection con= DBCon.getInstance().getConnection();
+        RemoteFunction remoteFunction=new RemoteFunction();
+//        Connection con= DBCon.getInstance().getConnection();
         selectButton.addActionListener(e-> {
             if (JOptionPane.showConfirmDialog(null, "确认选课？") == 0) {
 
-                String sql = "insert into grade (Sno,Cno) values(?,?)";
+                String sql = "insert into grade (Sno,Cno) values("+id+","+(String) dtm.getValueAt(table.getSelectedRow(), 0)+")";
                 try {
-                    PreparedStatement preparedStatement = con.prepareStatement(sql);
-                    preparedStatement.setString(1, id);
-                    preparedStatement.setString(2, (String) dtm.getValueAt(table.getSelectedRow(), 0));
-                    preparedStatement.execute();
+//                    PreparedStatement preparedStatement = con.prepareStatement(sql);
+//                    preparedStatement.setString(1, id);
+//                    preparedStatement.setString(2, (String) dtm.getValueAt(table.getSelectedRow(), 0));
+//                    preparedStatement.execute();
+                    remoteFunction.execute(sql);
                     item.doClick();
                     JOptionPane.showMessageDialog(null, "选课成功");
                 } catch (SQLException throwables) {

@@ -50,6 +50,12 @@ public class StudentTable extends JPanel {
             res[i][3]=student1.getSclassname();
             res[i][4]=student1.getSfaculty();
         }
+        for(int i=0;i< res.length;++i){
+            for(int j=0;j<res[i].length;++j){
+                System.out.print(res[i][j]+" ");
+            }
+            System.out.println("");
+        }
         defaultTableModel=new DefaultTableModel(res,name);
         jTable=new JTable(defaultTableModel);
         //jTable.setRowHeight(50);

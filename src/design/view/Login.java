@@ -1,10 +1,11 @@
 package design.view;
 
-import design.util.Verify;
+import design.util.RemoteFunction;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 /***********************************************************
  * 版权所有 (C)2020, hekai
@@ -34,7 +35,8 @@ public class Login {
     private final JComboBox<String> choice=new JComboBox<>(question);
 
     ActionListener actionListener= e -> {
-        Verify verify=new Verify();
+//        Verify verify=new Verify();
+        RemoteFunction remoteFunction=new RemoteFunction();
         String password;
         if(answer==null||answer.equals(question[0]))
         {
@@ -42,28 +44,43 @@ public class Login {
         } else if(answer.equals(question[1])) {
             password=new String(passwordTextField.getPassword());
             //Verify verify=new Verify();
-            switch (verify.verifyUserPassword(1,userTextField.getText(),password)) {
-                case 1 -> TeacherSuccess(userTextField.getText());
-                case 2 -> PasswordFail();
-                case 3 -> UserFail();
+            try {
+                switch (remoteFunction.verify(1,userTextField.getText(),password)) {
+                    case 1 -> TeacherSuccess(userTextField.getText());
+                    case 2 -> PasswordFail();
+                    case 3 -> UserFail();
+                }
+            }catch (RemoteException ea){
+                JOptionPane.showMessageDialog(frame,"无法连接到服务器","提示",JOptionPane.ERROR_MESSAGE);
             }
+
         } else if(answer.equals(question[2]))
         {
             password=new String(passwordTextField.getPassword());
             //Verify verify=new Verify();
-            switch (verify.verifyUserPassword(2,userTextField.getText(),password))
-            {
-                case 1 -> StudentSuccess(userTextField.getText());
-                case 2 -> PasswordFail();
-                case 3 -> UserFail();
+            try {
+                switch (remoteFunction.verify(2,userTextField.getText(),password))
+                {
+                    case 1 -> StudentSuccess(userTextField.getText());
+                    case 2 -> PasswordFail();
+                    case 3 -> UserFail();
+                }
+            } catch (RemoteException ex) {
+                JOptionPane.showMessageDialog(frame,"无法连接到服务器","提示",JOptionPane.ERROR_MESSAGE);
             }
+
         } else if(answer.equals(question[3])) {
-            switch (verify.verifyUserPassword(3,userTextField.getText(),new String(passwordTextField.getPassword())))
-            {
-                case 1 -> AdminSuccess();
-                case 2 -> PasswordFail();
-                case 3 -> UserFail();
+            try {
+                switch (remoteFunction.verify(3,userTextField.getText(),new String(passwordTextField.getPassword())))
+                {
+                    case 1 -> AdminSuccess();
+                    case 2 -> PasswordFail();
+                    case 3 -> UserFail();
+                }
+            } catch (RemoteException ex) {
+                JOptionPane.showMessageDialog(frame,"无法连接到服务器","提示",JOptionPane.ERROR_MESSAGE);
             }
+
 //            if(userTextField.getText().equals("1234")&&new String(passwordTextField.getPassword()).equals("1234")) {
 //                JOptionPane.showMessageDialog(frame,"登录成功！","提示",JOptionPane.PLAIN_MESSAGE);
 //                frame.dispose();

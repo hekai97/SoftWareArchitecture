@@ -1,6 +1,7 @@
 package design.view;
 
 import design.util.DBCon;
+import design.util.RemoteFunction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +31,7 @@ public class Information extends JPanel{
     JLabel idLabel;
     JLabel classLabel;
     JLabel facultyLabel;
+    RemoteFunction remoteFunction=new RemoteFunction();
     public Information(String id, JMenuItem item){
         setLayout(new FlowLayout(FlowLayout.CENTER,1000,000));
         Connection con= DBCon.getInstance().getConnection();
@@ -38,6 +40,7 @@ public class Information extends JPanel{
             PreparedStatement statement=con.prepareStatement(sql1);
             statement.execute();
             ResultSet st=statement.executeQuery();
+//            ResultSet st= remoteFunction.getResult(sql1);
             while(st.next()){
                 snoLabel=new JLabel("学号："+st.getString("Sno"));
                 nameLabel=new JLabel("姓名："+st.getString("Sname"));
@@ -75,6 +78,7 @@ public class Information extends JPanel{
             PreparedStatement preparedStatement=con.prepareStatement(sql);
             preparedStatement.execute();
             ResultSet st=preparedStatement.executeQuery();
+//            ResultSet st= remoteFunction.getResult(sql);
             while(st.next()){
                 s=st.getString("Fname");
             }

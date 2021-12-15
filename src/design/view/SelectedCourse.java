@@ -1,14 +1,12 @@
 package design.view;
 
 import design.controller.CourseList;
-import design.util.DBCon;
 import design.entity.CourseWithTeacher;
+import design.util.RemoteFunction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -55,16 +53,18 @@ public class SelectedCourse extends JPanel{
         AddToSouth(res,item,id);
     }
     private void AddToSouth(Object[][] res,JMenuItem item,String id){
-        Connection con= DBCon.getInstance().getConnection();
+//        Connection con= DBCon.getInstance().getConnection();
+        RemoteFunction remoteFunction=new RemoteFunction();
         selectButton.addActionListener(e-> {
             if (JOptionPane.showConfirmDialog(null, "确认退课？") == 0) {
 
-                String sql = "delete from grade where Sno=? And Cno=?";
+                String sql = "delete from grade where Sno="+id+" And Cno="+(String) dtm.getValueAt(table.getSelectedRow(), 0);
                 try {
-                    PreparedStatement preparedStatement = con.prepareStatement(sql);
-                    preparedStatement.setString(1, id);
-                    preparedStatement.setString(2, (String) dtm.getValueAt(table.getSelectedRow(), 0));
-                    preparedStatement.execute();
+//                    PreparedStatement preparedStatement = con.prepareStatement(sql);
+//                    preparedStatement.setString(1, id);
+//                    preparedStatement.setString(2, (String) dtm.getValueAt(table.getSelectedRow(), 0));
+//                    preparedStatement.execute();
+                    remoteFunction.execute(sql);
                     item.doClick();
                     JOptionPane.showMessageDialog(null, "退课成功");
                 } catch (SQLException throwables) {

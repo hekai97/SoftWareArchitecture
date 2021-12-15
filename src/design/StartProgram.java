@@ -1,4 +1,6 @@
-package design.view;
+package design;
+
+import design.view.Login;
 
 /**
  * @author: hekai
