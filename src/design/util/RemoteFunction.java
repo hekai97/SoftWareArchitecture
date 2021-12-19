@@ -36,15 +36,6 @@ public class RemoteFunction {
             e.printStackTrace();
         }
     }
-    public ResultSet getResult(String sql) throws SQLException{
-        ResultSet resultSet=null;
-        try {
-            resultSet = RemoteFunctions.getResultSet(sql);
-        } catch (RemoteException e) {
-            System.out.println("远程调用失败");
-        }
-        return resultSet;
-    }
     public int verify(int id,String user,String password) throws RemoteException{
         return RemoteFunctions.verifyUserPassword(id,user,password);
     }

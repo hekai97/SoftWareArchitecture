@@ -34,6 +34,9 @@ public class RepositoryImp<E> implements Repository<E> {
 //            ResultSet resultSet= remoteFunction.getResult(sql);
             ResultSetMetaData resultSetMetaData=resultSet.getMetaData();
             String[] ColumnName=getTableColumnName(resultSetMetaData);
+//            for(int i=0;i< ColumnName.length;++i){
+//                System.out.println(ColumnName[i]);
+//            }
             /**首先获取数据库列名，然后通过传进来的工厂类获取实例对应的类，通过反射
              * 然后再拿到这个类中的自定义的方法，不包括父类的
              * 然后根据数据库列名将拿到的方法进行拆分，定义一个二维的方法数组，将对应列名的

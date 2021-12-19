@@ -11,6 +11,5 @@ import java.sql.SQLException;
  */
 public interface RemoteInterface extends Remote {
     public void execute(String sql) throws RemoteException, SQLException;
-    public ResultSet getResultSet(String sql) throws RemoteException,SQLException;
     public int verifyUserPassword(int id,String user, String password) throws RemoteException;
 }
