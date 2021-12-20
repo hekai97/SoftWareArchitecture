@@ -1,8 +1,7 @@
 package design.view;
 
 import design.controller.GradeList;
-import design.entity.Grade;
-import design.util.RemoteFunction;
+import design.controller.RemoteFunction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,7 +10,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.List;
 import java.util.Vector;
 
 /***********************************************************
@@ -101,7 +99,7 @@ public class GradeTable extends JPanel {
         });
         updatebutton.addActionListener(e -> {
             String sql="update grade set "
-                    +"Sno'" +defaultTableModel.getValueAt(jTable.getSelectedRow(),0)+"',"
+                    +"Sno='" +defaultTableModel.getValueAt(jTable.getSelectedRow(),0)+"',"
                     +"Cno='"+defaultTableModel.getValueAt(jTable.getSelectedRow(),1)+"',"
                     +"grade='"+defaultTableModel.getValueAt(jTable.getSelectedRow(),2)+"' "
                     +"where Sno="+res[jTable.getSelectedRow()][0];

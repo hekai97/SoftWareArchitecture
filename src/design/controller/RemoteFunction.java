@@ -1,6 +1,7 @@
-package design.util;
+package design.controller;
 
 import design.remoteapi.RemoteInterface;
+import design.util.ConfigReader;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;

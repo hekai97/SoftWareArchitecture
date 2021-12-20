@@ -1,6 +1,6 @@
 package design.view;
 
-import design.util.RemoteFunction;
+import design.controller.RemoteFunction;
 
 import javax.swing.*;
 import java.awt.*;

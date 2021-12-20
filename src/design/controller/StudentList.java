@@ -1,7 +1,6 @@
 package design.controller;
 
 import design.remoteapi.RemoteInterface;
-import design.util.RemoteFunction;
 
 import java.rmi.RemoteException;
 

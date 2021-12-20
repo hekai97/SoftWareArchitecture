@@ -1,8 +1,7 @@
 package design.view;
 
 import design.controller.FacultyList;
-import design.entity.Faculty;
-import design.util.RemoteFunction;
+import design.controller.RemoteFunction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,7 +10,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.List;
 import java.util.Vector;
 
 /***********************************************************

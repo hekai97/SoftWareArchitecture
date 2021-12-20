@@ -1,7 +1,7 @@
 package design.view;
 
 import design.controller.GradeList;
-import design.util.RemoteFunction;
+import design.controller.RemoteFunction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

@@ -1,17 +1,13 @@
 package design.view;
 
 import design.controller.StudentList;
-import design.remoteapi.RemoteInterface;
 import design.util.DBCon;
-import design.util.RemoteFunction;
+import design.controller.RemoteFunction;
 
 import javax.swing.*;
 import java.awt.*;
 import java.rmi.RemoteException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Calendar;
 
 /***********************************************************
