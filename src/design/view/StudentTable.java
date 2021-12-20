@@ -100,12 +100,13 @@ public class StudentTable extends JPanel {
             @Override
             public void keyReleased(KeyEvent e) {
                 if(e.isAltDown()&&e.getKeyCode()==KeyEvent.VK_ENTER){
-                    String sql="insert into Student values("
-                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),0)+","
-                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),1)+","
-                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),2)+","
-                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),3)+","
-                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),4)+")";
+                    String sql="insert into Student values('"
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),0)+"','"
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),1)+"','"
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),2)+"','"
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),3)+"','"
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),4)+"')";
+                    System.out.println(sql);
                     try {
                         remoteFunction.execute(sql);
                         item.doClick();

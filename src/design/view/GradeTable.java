@@ -83,10 +83,10 @@ public class GradeTable extends JPanel {
             @Override
             public void keyReleased(KeyEvent e) {
                 if(e.isAltDown()&&e.getKeyCode()==KeyEvent.VK_ENTER){
-                    String sql="insert into grade values("
-                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),0)+","
-                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),1)+","
-                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),2)+")";
+                    String sql="insert into grade values('"
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),0)+"','"
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),1)+"','"
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),2)+"')";
                     try {
                         remoteFunction.execute(sql);
                         item.doClick();

@@ -1,14 +1,12 @@
 package design.view;
 
 import design.controller.CourseList;
-import design.entity.CourseWithTeacher;
 import design.util.RemoteFunction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.SQLException;
-import java.util.List;
 
 /***********************************************************
  * 版权所有 (C)2020, hekai
@@ -59,7 +57,7 @@ public class OptionalCourse extends JPanel {
         selectButton.addActionListener(e-> {
             if (JOptionPane.showConfirmDialog(null, "确认选课？") == 0) {
 
-                String sql = "insert into grade (Sno,Cno) values("+id+","+(String) dtm.getValueAt(table.getSelectedRow(), 0)+")";
+                String sql = "insert into grade (Sno,Cno) values('"+id+"','"+(String) dtm.getValueAt(table.getSelectedRow(), 0)+"')";
                 try {
 //                    PreparedStatement preparedStatement = con.prepareStatement(sql);
 //                    preparedStatement.setString(1, id);

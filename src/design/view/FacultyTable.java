@@ -83,9 +83,9 @@ public class FacultyTable extends JPanel {
             @Override
             public void keyReleased(KeyEvent e) {
                 if(e.isAltDown()&&e.getKeyCode()==KeyEvent.VK_ENTER){
-                    String sql="insert into faculty values("
-                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),0)+","
-                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),1)+")";
+                    String sql="insert into faculty values('"
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),0)+"','"
+                            +(String)defaultTableModel.getValueAt(jTable.getSelectedRow(),1)+"')";
                     try {
                         remoteFunction.execute(sql);
                         item.doClick();
