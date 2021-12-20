@@ -37,14 +37,15 @@ public class FacultyTable extends JPanel {
         title.setFont(new Font("",Font.BOLD,30));
         setLayout(new BorderLayout());
         FacultyList facultyList =new FacultyList();
-        List<Faculty> list= facultyList.FacultyRes();
+//        List<Faculty> list= facultyList.FacultyRes();
         String[] name={"学院代号","学院名"};
-        Object[][] res=new Object[list.size()][name.length];
-        for(int i=0;i<list.size();i++){
-            Faculty faculty1=list.get(i);
-            res[i][0]=faculty1.getFno();
-            res[i][1]=faculty1.getFname();
-        }
+//        Object[][] res=new Object[list.size()][name.length];
+//        for(int i=0;i<list.size();i++){
+//            Faculty faculty1=list.get(i);
+//            res[i][0]=faculty1.getFno();
+//            res[i][1]=faculty1.getFname();
+//        }
+        Object[][] res= facultyList.FacultyRes();
         defaultTableModel=new DefaultTableModel(res,name);
         jTable=new JTable(defaultTableModel);
         //jTable.setRowHeight(50);

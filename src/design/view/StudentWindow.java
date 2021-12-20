@@ -62,6 +62,6 @@ public class StudentWindow extends MainFrame{
 
 
     public static void main(String[] args) {
-        new StudentWindow("201958503103");
+        new StudentWindow("201958503150");
     }
 }

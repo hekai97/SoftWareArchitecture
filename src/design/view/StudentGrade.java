@@ -1,15 +1,12 @@
 package design.view;
 
 import design.controller.GradeList;
-import design.entity.StudentGradeForStudent;
-import design.entity.StudentGradeForTeacher;
 import design.util.RemoteFunction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.SQLException;
-import java.util.List;
 
 /***********************************************************
  * 版权所有 (C)2020, hekai
@@ -33,14 +30,15 @@ public class StudentGrade extends JPanel {
         title.setFont(new Font("",Font.BOLD,20));
         setLayout(new BorderLayout());
         GradeList gradeList=new GradeList();
-        List<StudentGradeForStudent> list=gradeList.GradeResForStudent(id);
+//        List<StudentGradeForStudent> list=gradeList.GradeResForStudent(id);
         String[] name={"课程号","成绩"};
-        Object[][] res=new Object[list.size()][name.length];
-        for(int i=0;i<list.size();i++){
-            StudentGradeForStudent grade=list.get(i);
-            res[i][0]=grade.getCname();
-            res[i][1]=grade.getGrade();
-        }
+//        Object[][] res=new Object[list.size()][name.length];
+//        for(int i=0;i<list.size();i++){
+//            StudentGradeForStudent grade=list.get(i);
+//            res[i][0]=grade.getCname();
+//            res[i][1]=grade.getGrade();
+//        }
+        Object[][] res= gradeList.GradeResForStudent(id);
         dtm=new DefaultTableModel(res,name);
         table=new JTable(dtm);
         add(title,BorderLayout.NORTH);
@@ -53,14 +51,15 @@ public class StudentGrade extends JPanel {
         title.setFont(new Font("",Font.BOLD,20));
         setLayout(new BorderLayout());
         GradeList gradeList=new GradeList();
-        List<StudentGradeForTeacher> list=gradeList.GradeResForTeacher(id);
+//        List<StudentGradeForTeacher> list=gradeList.GradeResForTeacher(id);
         String[] name={"姓名","成绩"};
-        Object[][] res=new Object[list.size()][name.length];
-        for(int i=0;i<list.size();i++){
-            StudentGradeForTeacher grade=list.get(i);
-            res[i][0]=grade.getSname();
-            res[i][1]=grade.getGrade();
-        }
+//        Object[][] res=new Object[list.size()][name.length];
+//        for(int i=0;i<list.size();i++){
+//            StudentGradeForTeacher grade=list.get(i);
+//            res[i][0]=grade.getSname();
+//            res[i][1]=grade.getGrade();
+//        }
+        Object[][] res= gradeList.GradeResForTeacher(id);
         dtm=new DefaultTableModel(res,name);
         table=new JTable(dtm);
         add(title,BorderLayout.NORTH);

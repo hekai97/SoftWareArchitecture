@@ -39,17 +39,18 @@ public class StudentTable extends JPanel {
         title.setFont(new Font("",Font.BOLD,30));
         setLayout(new BorderLayout());
         StudentList studentList =new StudentList();
-        List<Student> list= studentList.StudentRes();
+//        List<Student> list= studentList.StudentRes();
         String[] name={"学号","姓名","身份证号码","班级","院系"};
-        Object[][] res=new Object[list.size()][name.length];
-        for(int i=0;i<list.size();i++){
-            Student student1=list.get(i);
-            res[i][0]=student1.getSno();
-            res[i][1]=student1.getSname();
-            res[i][2]=student1.getSid();
-            res[i][3]=student1.getSclassname();
-            res[i][4]=student1.getSfaculty();
-        }
+//        Object[][] res=new Object[list.size()][name.length];
+//        for(int i=0;i<list.size();i++){
+//            Student student1=list.get(i);
+//            res[i][0]=student1.getSno();
+//            res[i][1]=student1.getSname();
+//            res[i][2]=student1.getSid();
+//            res[i][3]=student1.getSclassname();
+//            res[i][4]=student1.getSfaculty();
+//        }
+        Object[][] res=studentList.StudentRes();
         for(int i=0;i< res.length;++i){
             for(int j=0;j<res[i].length;++j){
                 System.out.print(res[i][j]+" ");

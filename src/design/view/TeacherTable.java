@@ -37,15 +37,16 @@ public class TeacherTable extends JPanel {
         title.setFont(new Font("",Font.BOLD,30));
         setLayout(new BorderLayout());
         TeacherList teacherList =new TeacherList();
-        List<Teacher> list= teacherList.TeacherRes();
+//        List<Teacher> list= teacherList.TeacherRes();
         String[] name={"教师编号","姓名","院系"};
-        Object[][] res=new Object[list.size()][name.length];
-        for(int i=0;i<list.size();i++){
-            Teacher teacher1=list.get(i);
-            res[i][0]=teacher1.getTno();
-            res[i][1]=teacher1.getTname();
-            res[i][2]=teacher1.getTfaculty();
-        }
+//        Object[][] res=new Object[list.size()][name.length];
+//        for(int i=0;i<list.size();i++){
+//            Teacher teacher1=list.get(i);
+//            res[i][0]=teacher1.getTno();
+//            res[i][1]=teacher1.getTname();
+//            res[i][2]=teacher1.getTfaculty();
+//        }
+        Object[][] res=teacherList.TeacherRes();
         defaultTableModel=new DefaultTableModel(res,name);
         jTable=new JTable(defaultTableModel);
         //jTable.setRowHeight(50);

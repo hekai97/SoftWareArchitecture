@@ -37,15 +37,16 @@ public class GradeTable extends JPanel {
         title.setFont(new Font("",Font.BOLD,30));
         setLayout(new BorderLayout());
         GradeList gradeList=new GradeList();
-        List<Grade> list= gradeList.GradeRes();
+//        List<Grade> list= gradeList.GradeRes();
         String[] name={"学号","课程号","成绩"};
-        Object[][] res=new Object[list.size()][name.length];
-        for(int i=0;i<list.size();i++){
-            Grade grade1=list.get(i);
-            res[i][0]=grade1.getSno();
-            res[i][1]=grade1.getCno();
-            res[i][2]=grade1.getGrade();
-        }
+//        Object[][] res=new Object[list.size()][name.length];
+//        for(int i=0;i<list.size();i++){
+//            Grade grade1=list.get(i);
+//            res[i][0]=grade1.getSno();
+//            res[i][1]=grade1.getCno();
+//            res[i][2]=grade1.getGrade();
+//        }
+        Object[][] res= gradeList.GradeRes();
         defaultTableModel=new DefaultTableModel(res,name);
         jTable=new JTable(defaultTableModel);
         //jTable.setRowHeight(50);

@@ -1,14 +1,12 @@
 package design.view;
 
 import design.controller.CourseList;
-import design.entity.CourseWithTeacher;
 import design.util.RemoteFunction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.SQLException;
-import java.util.List;
 
 /***********************************************************
  * 版权所有 (C)2020, hekai
@@ -33,17 +31,18 @@ public class SelectedCourse extends JPanel{
         /*OptionalCourseList optionalCourseList=new OptionalCourseList();
         List<Course> list=optionalCourseList.CourseRes(id);*/
         CourseList courseList=new CourseList();
-        List<CourseWithTeacher> list=courseList.CourseRes(false,id);
+//        List<CourseWithTeacher> list=courseList.CourseRes(false,id);
         String[] name={"课程号","课程名","任课教师","学分","学时"};
-        Object[][] res=new Object[list.size()][name.length];
-        for(int i=0;i<list.size();i++){
-            CourseWithTeacher course1=list.get(i);
-            res[i][0]=course1.getCno();
-            res[i][1]=course1.getCname();
-            res[i][2]=course1.getTname();
-            res[i][3]=course1.getCcredit();
-            res[i][4]=course1.getCtime();
-        }
+//        Object[][] res=new Object[list.size()][name.length];
+//        for(int i=0;i<list.size();i++){
+//            CourseWithTeacher course1=list.get(i);
+//            res[i][0]=course1.getCno();
+//            res[i][1]=course1.getCname();
+//            res[i][2]=course1.getTname();
+//            res[i][3]=course1.getCcredit();
+//            res[i][4]=course1.getCtime();
+//        }
+        Object[][] res=courseList.CourseRes(false,id);
         dtm=new DefaultTableModel(res,name);
         table=new JTable(dtm);
         add(title,BorderLayout.NORTH);

@@ -1,9 +1,9 @@
 package design.controller;
 
-import design.entity.Faculty;
-import design.factory.FacultyFactory;
-import design.serverImp.RepositoryImp;
-import java.util.List;
+import design.remoteapi.RemoteInterface;
+import design.util.RemoteFunction;
+
+import java.rmi.RemoteException;
 
 /***********************************************************
  * 版权所有 (C)2020, hekai
@@ -17,10 +17,18 @@ import java.util.List;
  * 完成日期： 20201215
  **********************************************************/
 public class FacultyList {
-    RepositoryImp<Faculty> repositoryImp=new RepositoryImp<>();
-    FacultyFactory facultyFactory=new FacultyFactory();
-    public List<Faculty> FacultyRes(){
+//    RepositoryImp<Faculty> repositoryImp=new RepositoryImp<>();
+//    FacultyFactory facultyFactory=new FacultyFactory();
+    RemoteFunction remoteFunction=new RemoteFunction();
+//    public List<Faculty> FacultyRes(){
+    public Object[][] FacultyRes(){
         String sql= "select * from faculty";
-        return repositoryImp.getResult(facultyFactory,sql);
+        Object[][] res=null;
+        try {
+            res=remoteFunction.getResult(RemoteInterface.MYOBJECT.Faculty,sql);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 }

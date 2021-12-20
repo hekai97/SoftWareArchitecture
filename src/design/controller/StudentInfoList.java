@@ -1,10 +1,9 @@
 package design.controller;
 
-import design.entity.StudentInfo;
-import design.factory.StudentInfoFactory;
-import design.serverImp.RepositoryImp;
+import design.remoteapi.RemoteInterface;
+import design.util.RemoteFunction;
 
-import java.util.List;
+import java.rmi.RemoteException;
 
 /***********************************************************
  * 版权所有 (C)2020, hekai
@@ -18,10 +17,19 @@ import java.util.List;
  * 完成日期： 20201215
  **********************************************************/
 public class StudentInfoList {
-    RepositoryImp<StudentInfo> repositoryImp=new RepositoryImp<>();
-    StudentInfoFactory studentInfoFactory=new StudentInfoFactory();
-    public List<StudentInfo> StudentRes(){
+//    RepositoryImp<StudentInfo> repositoryImp=new RepositoryImp<>();
+//    StudentInfoFactory studentInfoFactory=new StudentInfoFactory();
+//    public List<StudentInfo> StudentRes(){
+    RemoteFunction remoteFunction=new RemoteFunction();
+    public Object[][] StudentRes(){
         String sql= "select * from student_info";
-        return repositoryImp.getResult(studentInfoFactory,sql);
+//        return repositoryImp.getResult(studentInfoFactory,sql);
+        Object[][] res=null;
+        try {
+            res=remoteFunction.getResult(RemoteInterface.MYOBJECT.Student,sql);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 }

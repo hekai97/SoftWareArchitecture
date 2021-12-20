@@ -6,7 +6,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -38,5 +37,11 @@ public class RemoteFunction {
     }
     public int verify(int id,String user,String password) throws RemoteException{
         return RemoteFunctions.verifyUserPassword(id,user,password);
+    }
+    public Object[][] getResult(RemoteInterface.MYOBJECT index, String sql) throws RemoteException {
+        return RemoteFunctions.getResult(index, sql);
+    }
+    public String getStringByKey(String key,String sql) throws RemoteException {
+        return RemoteFunctions.getStringByKey(key,sql);
     }
 }
