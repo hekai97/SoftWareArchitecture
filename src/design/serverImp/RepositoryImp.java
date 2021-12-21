@@ -97,13 +97,13 @@ public class RepositoryImp<E> implements Repository<E> {
     }
 
 
-    public static void main(String[] args) {
-        RepositoryImp<Teacher> repositoryImp=new RepositoryImp<>();
-        List<Teacher> list= repositoryImp.getResult(new TeacherFactory(),"select * from Teacher");
-        for(int i=0;i<list.size();++i){
-            System.out.println(list.get(i).getTno());
-            System.out.println(list.get(i).getTname());
-            System.out.println(list.get(i).getTfaculty());
-        }
-    }
+//    public static void main(String[] args) {
+//        RepositoryImp<Teacher> repositoryImp=new RepositoryImp<>();
+//        List<Teacher> list= repositoryImp.getResult(new TeacherFactory(),"select * from Teacher");
+//        for(int i=0;i<list.size();++i){
+//            System.out.println(list.get(i).getTno());
+//            System.out.println(list.get(i).getTname());
+//            System.out.println(list.get(i).getTfaculty());
+//        }
+//    }
 }

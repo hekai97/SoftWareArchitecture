@@ -1,12 +1,8 @@
 package design.remoteapi;
 
-import design.factory.ModelFactory;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  * @author: hekai
